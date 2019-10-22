@@ -58,7 +58,7 @@ public class AddPrescription extends javax.swing.JFrame {
         lblPatientId = new javax.swing.JLabel();
         txtPatientId = new javax.swing.JTextField();
         lblDoctorId = new javax.swing.JLabel();
-        txtPatientID1 = new javax.swing.JTextField();
+        txtDoctorId = new javax.swing.JTextField();
         lblDate = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
         lblPatientName = new javax.swing.JLabel();
@@ -108,7 +108,19 @@ public class AddPrescription extends javax.swing.JFrame {
 
         lblPatientId.setText("Patient ID");
 
+        txtPatientId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPatientIdActionPerformed(evt);
+            }
+        });
+
         lblDoctorId.setText("Doctor ID");
+
+        txtDoctorId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDoctorIdActionPerformed(evt);
+            }
+        });
 
         lblDate.setText("Date");
 
@@ -196,6 +208,11 @@ public class AddPrescription extends javax.swing.JFrame {
         jButtonCheckCocktail.setText("Check Cocktail");
 
         jButtonSubmit.setText("Submit");
+        jButtonSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSubmitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,7 +285,7 @@ public class AddPrescription extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblDoctorId)
                                         .addGap(50, 50, 50)
-                                        .addComponent(txtPatientID1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(lblDoctorName)))
                                 .addGap(18, 18, 18)
@@ -307,7 +324,7 @@ public class AddPrescription extends javax.swing.JFrame {
                             .addComponent(lblDoctorName)
                             .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDoctorId)
-                            .addComponent(txtPatientID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDrugName)
@@ -445,6 +462,46 @@ public class AddPrescription extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDateActionPerformed
 
+    private void txtPatientIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPatientIdActionPerformed
+        
+        String id =txtPatientId.getText();
+        txtPatientName.setText(id);
+    }//GEN-LAST:event_txtPatientIdActionPerformed
+
+    private void txtDoctorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoctorIdActionPerformed
+
+        String id =txtDoctorId.getText();
+        txtDoctorName.setText(id);
+//        try {
+//            if (cmbPerson.getSelectedItem() == "Student") {
+//                Student s = PersonDB.getStudent(id);        
+//                txtName.setText(s.getName());
+//                txtAddress.setText(s.getAddress());
+//                txtAge.setText(String.valueOf(s.getAge()));
+//            
+//                txt1.setText(s.course);
+//            
+//                double[] grades = s.getGrades();
+//                String g = "";
+//                //-1 removes last ","
+//                for (int i = 0; i<grades.length-1; i++){
+//                    g += Double.toString(grades[i]) + ",";
+//                } 
+//                g += Double.toString(grades.length-1);
+//                             
+//                txt2.setText(g);
+//            
+//                lbl1.setText("Course");
+//                lbl2.setText("Grades");
+//            }
+    }//GEN-LAST:event_txtDoctorIdActionPerformed
+
+    private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
+        
+//        String id =txtDoctorId.getText();
+        txtPrescriptionId.setText("123");
+    }//GEN-LAST:event_jButtonSubmitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -507,10 +564,10 @@ public class AddPrescription extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrescriptionId;
     private javax.swing.JLabel lblStartDate;
     private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtDoctorId;
     private javax.swing.JTextField txtDoctorName;
     private javax.swing.JTextField txtDose;
     private javax.swing.JTextField txtEndDate;
-    private javax.swing.JTextField txtPatientID1;
     private javax.swing.JTextField txtPatientId;
     private javax.swing.JTextField txtPatientName;
     private javax.swing.JTextField txtPatientType;

@@ -129,7 +129,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="lblDoctorId" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="txtPatientID1" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="txtDoctorId" min="-2" pref="80" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="lblDoctorName" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -181,7 +181,7 @@
                           <Component id="lblDoctorName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtDoctorName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDoctorId" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPatientID1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDoctorId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -244,13 +244,19 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPatientId">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPatientIdActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDoctorId">
       <Properties>
         <Property name="text" type="java.lang.String" value="Doctor ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPatientID1">
+    <Component class="javax.swing.JTextField" name="txtDoctorId">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDoctorIdActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDate">
       <Properties>
@@ -426,6 +432,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Submit"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSubmitActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
