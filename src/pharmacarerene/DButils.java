@@ -15,19 +15,16 @@ private static Connection connection;
          }
          else {
              try {
-                 // set the db url, username, and password
-                 //TODO: Ask for user input
-                 String url = "jdbc:mysql://lamp.tafe.mst:3306/Pharmacare";
-                 String username = "rene";
-                 String password = "gc1t#123";
- 
-                 // get and return connection
-                 connection = DriverManager.getConnection(
-                         url, username, password);
-                 return connection;
-             } catch (SQLException e) {
+                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb"
+                    + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", 
+                    "login",  "pw" );
+
+                    return connection;
+                }
+                catch (SQLException e) 
+                {
                  throw new Exception(e);
-             }            
+                }            
          }
      }
      

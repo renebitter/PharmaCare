@@ -77,7 +77,7 @@
                                   <Component id="txtPrescriptionId" min="-2" pref="80" max="-2" attributes="0"/>
                                   <Component id="txtPatientId" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="415" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="lblPatientType" min="-2" max="-2" attributes="0"/>
@@ -130,6 +130,8 @@
                                       <Component id="lblDoctorId" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                                       <Component id="txtDoctorId" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="btnCheckDoctorId" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="lblDoctorName" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -182,8 +184,9 @@
                           <Component id="txtDoctorName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDoctorId" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtDoctorId" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCheckDoctorId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblDrugName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDose" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -222,7 +225,7 @@
                   <Component id="jButtonSubmit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonExit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -434,6 +437,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSubmitActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCheckDoctorId">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Check"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheckDoctorIdActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

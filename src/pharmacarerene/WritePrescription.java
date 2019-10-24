@@ -14,17 +14,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author reneb
  */
-public class AddPrescription extends javax.swing.JFrame {
+public class WritePrescription extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddPrescription
+     * Creates new form WritePrescription
      */
     DefaultTableModel dtm = new DefaultTableModel();
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
     
     
-    public AddPrescription() {
+    public WritePrescription() {
         initComponents();
         
             try {
@@ -86,6 +86,7 @@ public class AddPrescription extends javax.swing.JFrame {
         jButtonExit = new javax.swing.JButton();
         jButtonCheckCocktail = new javax.swing.JButton();
         jButtonSubmit = new javax.swing.JButton();
+        btnCheckDoctorId = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -214,6 +215,13 @@ public class AddPrescription extends javax.swing.JFrame {
             }
         });
 
+        btnCheckDoctorId.setText("Check");
+        btnCheckDoctorId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckDoctorIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -245,7 +253,7 @@ public class AddPrescription extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPrescriptionId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblPatientType)
@@ -286,6 +294,8 @@ public class AddPrescription extends javax.swing.JFrame {
                                         .addComponent(lblDoctorId)
                                         .addGap(50, 50, 50)
                                         .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(50, 50, 50)
+                                        .addComponent(btnCheckDoctorId)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(lblDoctorName)))
                                 .addGap(18, 18, 18)
@@ -324,8 +334,9 @@ public class AddPrescription extends javax.swing.JFrame {
                             .addComponent(lblDoctorName)
                             .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDoctorId)
-                            .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
+                            .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCheckDoctorId))
+                        .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDrugName)
                             .addComponent(lblDose))
@@ -355,7 +366,7 @@ public class AddPrescription extends javax.swing.JFrame {
                     .addComponent(jButtonCheckCocktail)
                     .addComponent(jButtonSubmit)
                     .addComponent(jButtonExit))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -502,6 +513,22 @@ public class AddPrescription extends javax.swing.JFrame {
         txtPrescriptionId.setText("123");
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
+    private void btnCheckDoctorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckDoctorIdActionPerformed
+        
+        int id = Integer.parseInt(txtDoctorId.getText());
+        System.out.println(id);
+        txtDoctorName.setText("asd");
+        
+        try {            
+//            Doctor d = GetData.getDoctor(id);        
+//            txtDoctorName.setText(d.getName());           
+        }
+        catch (Exception e) {            
+            txtDoctorName.setText("not found!");
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_btnCheckDoctorIdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -519,25 +546,27 @@ public class AddPrescription extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WritePrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WritePrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WritePrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WritePrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddPrescription().setVisible(true);
+                new WritePrescription().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCheckDoctorId;
     private javax.swing.JCheckBox chkBoxActive;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonCheckCocktail;
