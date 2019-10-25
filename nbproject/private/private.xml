@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Documents/NetBeansProjects/PharmaCareRene/src/pharmacarerene/ViewPrescription.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/PharmaCareRene/src/pharmacarerene/Prescription.java</file>
             <file>file:/D:/Documents/NetBeansProjects/PharmaCareRene/src/pharmacarerene/DButils.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/PharmaCareRene/src/pharmacarerene/WritePrescription.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/PharmaCareRene/src/pharmacarerene/PharmaCareRene.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/PharmaCareRene/src/pharmacarerene/GetPrescriptionDetails.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/PharmaCareRene/src/pharmacarerene/MainForm.java</file>
         </group>
     </open-files>
 </project-private>

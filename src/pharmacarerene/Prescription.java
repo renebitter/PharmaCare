@@ -9,12 +9,14 @@ import java.util.Date;
 public class Prescription { 
     
     // Variables
-    String nameDoctor;
-    String namePatient;
+    
     int idPrescription;
+    Date date;
     int idDoctor;
     int idPatient;
-    int typePatient; 
+    int typePatient;    
+    String nameDoctor;
+    String namePatient;
     String nameDrug;
     String dose;
     String frequency;
@@ -25,14 +27,15 @@ public class Prescription {
     // Constructor
     Prescription(int idPrescription, int idDoctor, int idPatient, 
             String nameDoctor, String namePatient, int typePatient, String nameDrug, 
-            String dose, String frequency, int active, Date dateStart, Date dateEnd) {
+            String dose, String frequency, int active, Date dateStart, Date dateEnd, Date date) {
                
-        this.nameDoctor = nameDoctor;
-        this.namePatient = namePatient;
         this.idPrescription = idPrescription;
+        this.date = date;        
         this.idDoctor = idDoctor;
         this.idPatient = idPatient;
         this.typePatient = typePatient; 
+        this.nameDoctor = nameDoctor;
+        this.namePatient = namePatient;
         this.nameDrug = nameDrug;
         this.dose = dose;
         this.frequency = frequency;
@@ -43,17 +46,13 @@ public class Prescription {
 //        System.out.println(nameDoctor);
     }
            
-    // Methods
-    public String getNameDoctor() {
-        return this.nameDoctor;
-    }
-
-    public String getNamePatient() {
-        return this.namePatient;
-    }
-
+    // Methods   
     public int getIdPrescription() {
         return this.idPrescription;
+    }
+    
+    public Date getDate() {
+        return this.date;
     }
     
     public int getIdDoctor() {
@@ -66,6 +65,14 @@ public class Prescription {
             
     public int getTypePatient() {
         return this.typePatient;
+    }
+    
+    public String getNameDoctor() {
+        return this.nameDoctor;
+    }
+
+    public String getNamePatient() {
+        return this.namePatient;
     }
     
     public String getNameDrug() {

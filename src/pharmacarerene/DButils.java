@@ -17,7 +17,7 @@ private static Connection connection;
              try {
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb"
                     + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", 
-                    "login",  "pw" );
+                    "reneb",  "123456" );
 
                     return connection;
                 }
