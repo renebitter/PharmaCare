@@ -1,5 +1,8 @@
 package pharmacarerene;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -15,9 +18,13 @@ public class WritePrescription extends javax.swing.JFrame {
     Date date = new Date();
     
     
+    
+    
     public WritePrescription() {
         initComponents();
         
+        // Call Function to populate combobox
+    jComboBoxDrugNameFill();
             try {
             // Set date
             txtDate.setText(formatter.format(date));
@@ -61,7 +68,6 @@ public class WritePrescription extends javax.swing.JFrame {
         lblDrugName = new javax.swing.JLabel();
         lblDose = new javax.swing.JLabel();
         txtDose = new javax.swing.JTextField();
-        jComboBoxFrequency = new javax.swing.JComboBox<>();
         lblFrequency = new javax.swing.JLabel();
         lblStartDate = new javax.swing.JLabel();
         txtStartDate = new javax.swing.JTextField();
@@ -77,6 +83,8 @@ public class WritePrescription extends javax.swing.JFrame {
         jButtonCheckCocktail = new javax.swing.JButton();
         jButtonSubmit = new javax.swing.JButton();
         btnCheckDoctorId = new javax.swing.JButton();
+        txtFrequency = new javax.swing.JTextField();
+        btnCheckPatientId = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,18 +142,15 @@ public class WritePrescription extends javax.swing.JFrame {
 
         txtPatientType.setEditable(false);
 
-        jComboBoxDrugName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDrugName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDrugNameActionPerformed(evt);
+            }
+        });
 
         lblDrugName.setText("Drug Name");
 
         lblDose.setText("Dose");
-
-        jComboBoxFrequency.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxFrequency.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFrequencyActionPerformed(evt);
-            }
-        });
 
         lblFrequency.setText("Frequency");
 
@@ -212,6 +217,13 @@ public class WritePrescription extends javax.swing.JFrame {
             }
         });
 
+        btnCheckPatientId.setText("Check");
+        btnCheckPatientId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckPatientIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -270,9 +282,9 @@ public class WritePrescription extends javax.swing.JFrame {
                                             .addComponent(lblDose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBoxFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblFrequency))
-                                        .addGap(39, 39, 39)
+                                            .addComponent(lblFrequency)
+                                            .addComponent(txtFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(62, 62, 62)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtStartDate, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                                             .addComponent(lblStartDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -280,12 +292,15 @@ public class WritePrescription extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                                             .addComponent(lblEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblDoctorId)
-                                        .addGap(50, 50, 50)
-                                        .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(50, 50, 50)
-                                        .addComponent(btnCheckDoctorId)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(btnCheckPatientId)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblDoctorId)
+                                                .addGap(50, 50, 50)
+                                                .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(50, 50, 50)
+                                                .addComponent(btnCheckDoctorId)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(lblDoctorName)))
                                 .addGap(18, 18, 18)
@@ -301,8 +316,7 @@ public class WritePrescription extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFrequency)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPrescriptionId)
@@ -314,7 +328,8 @@ public class WritePrescription extends javax.swing.JFrame {
                             .addComponent(lblPatientId)
                             .addComponent(txtPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPatientName)
-                            .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCheckPatientId))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPatientType)
@@ -333,7 +348,8 @@ public class WritePrescription extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxDrugName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblStartDate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -356,7 +372,7 @@ public class WritePrescription extends javax.swing.JFrame {
                     .addComponent(jButtonCheckCocktail)
                     .addComponent(jButtonSubmit)
                     .addComponent(jButtonExit))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -425,15 +441,11 @@ public class WritePrescription extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonModifyActionPerformed
 
-    private void jComboBoxFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFrequencyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFrequencyActionPerformed
-
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         
         String drugName = jComboBoxDrugName.getSelectedItem().toString();
         String dose = txtDose.getText();
-        String frequency = jComboBoxFrequency.getSelectedItem().toString();
+        String frequency = txtFrequency.getText();
         String startDate = txtStartDate.getText();
         String endDate = txtEndDate.getText();
         boolean status = chkBoxActive.isSelected();
@@ -465,60 +477,105 @@ public class WritePrescription extends javax.swing.JFrame {
 
     private void txtPatientIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPatientIdActionPerformed
         
-        String id =txtPatientId.getText();
-        txtPatientName.setText(id);
     }//GEN-LAST:event_txtPatientIdActionPerformed
 
     private void txtDoctorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoctorIdActionPerformed
 
-        String id =txtDoctorId.getText();
-        txtDoctorName.setText(id);
-//        try {
-//            if (cmbPerson.getSelectedItem() == "Student") {
-//                Student s = PersonDB.getStudent(id);        
-//                txtName.setText(s.getName());
-//                txtAddress.setText(s.getAddress());
-//                txtAge.setText(String.valueOf(s.getAge()));
-//            
-//                txt1.setText(s.course);
-//            
-//                double[] grades = s.getGrades();
-//                String g = "";
-//                //-1 removes last ","
-//                for (int i = 0; i<grades.length-1; i++){
-//                    g += Double.toString(grades[i]) + ",";
-//                } 
-//                g += Double.toString(grades.length-1);
-//                             
-//                txt2.setText(g);
-//            
-//                lbl1.setText("Course");
-//                lbl2.setText("Grades");
-//            }
     }//GEN-LAST:event_txtDoctorIdActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
-        
+        //TODO: SET NEW PRESCRIPTION ID AVAILABLE ON THE DB
 //        String id =txtDoctorId.getText();
-        txtDate.setText("123");
+        txtPrescriptionId.setText("123456");
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     private void btnCheckDoctorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckDoctorIdActionPerformed
         
-        int id = Integer.parseInt(txtDoctorId.getText());
-        System.out.println(id);
-        txtDoctorName.setText("asd");
+        int idDoctor = Integer.parseInt(txtDoctorId.getText());
         
-        try {            
-//            Doctor d = GetData.getDoctor(id);        
-//            txtDoctorName.setText(d.getName());           
-        }
-        catch (Exception e) {            
-            txtDoctorName.setText("not found!");
+         try{
+            String sql = "SELECT DISTINCT FIRST_NAME, LAST_NAME FROM DOCTOR WHERE IDDOCTOR = " + idDoctor;
+            System.out.println(sql);
+            Connection db = DButils.getConnection();
+            PreparedStatement ps = db.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                String firstName = rs.getString("FIRST_NAME");
+                String lastName = rs.getString("LAST_NAME");
+
+                txtDoctorName.setText(firstName + " " + lastName);
+            } else {
+                txtDoctorName.setText("Not found!");
+            }
+            
+        }catch(Exception e){
+            txtDoctorName.setText("Not found!");
             System.out.println(e);
-        }
+        }  
     }//GEN-LAST:event_btnCheckDoctorIdActionPerformed
 
+    private void jComboBoxDrugNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDrugNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxDrugNameActionPerformed
+
+    private void btnCheckPatientIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckPatientIdActionPerformed
+        
+        int idPatient = Integer.parseInt(txtPatientId.getText());
+        System.out.println(idPatient);
+        
+         try{
+            String sql = "SELECT DISTINCT FIRST_NAME, LAST_NAME, TYPE FROM PATIENT WHERE IDPATIENT = " + idPatient;
+            System.out.println(sql);
+            Connection db = DButils.getConnection();
+            PreparedStatement ps = db.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                String firstName = rs.getString("FIRST_NAME");
+                String lastName = rs.getString("LAST_NAME");
+                int type = rs.getInt("TYPE");
+                
+                txtPatientName.setText(firstName + " " + lastName);
+                
+                if(type == 1) {
+                    txtPatientType.setText("Indoor");
+                } else {
+                    txtPatientType.setText("Outdoor");
+                }
+                
+            } else {
+                txtPatientName.setText("Not found!");
+                txtPatientType.setText("Not found!");
+            }
+            
+        }catch(Exception e){
+            txtPatientName.setText("Not found!");
+            System.out.println(e);
+        } 
+    }//GEN-LAST:event_btnCheckPatientIdActionPerformed
+
+    private void jComboBoxDrugNameFill() {                                                  
+       
+        //TODO: Make separate class?
+        try{
+            String sql ="SELECT NAME FROM DRUGS";
+            Connection db = DButils.getConnection();
+            PreparedStatement ps = db.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String name = rs.getString("name");
+                jComboBoxDrugName.addItem(name);
+            }
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }                                                 
+
+    
     /**
      * @param args the command line arguments
      */
@@ -557,6 +614,7 @@ public class WritePrescription extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCheckDoctorId;
+    private javax.swing.JButton btnCheckPatientId;
     private javax.swing.JCheckBox chkBoxActive;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonCheckCocktail;
@@ -565,7 +623,6 @@ public class WritePrescription extends javax.swing.JFrame {
     private javax.swing.JButton jButtonModify;
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JComboBox<String> jComboBoxDrugName;
-    private javax.swing.JComboBox<String> jComboBoxFrequency;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
@@ -587,6 +644,7 @@ public class WritePrescription extends javax.swing.JFrame {
     private javax.swing.JTextField txtDoctorName;
     private javax.swing.JTextField txtDose;
     private javax.swing.JTextField txtEndDate;
+    private javax.swing.JTextField txtFrequency;
     private javax.swing.JTextField txtPatientId;
     private javax.swing.JTextField txtPatientName;
     private javax.swing.JTextField txtPatientType;
