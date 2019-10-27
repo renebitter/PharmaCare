@@ -1,22 +1,24 @@
 package pharmacarerene;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author reneb
- */
 public class ViewPrescription extends javax.swing.JFrame {
 
     // Define table model
     DefaultTableModel dtm = new DefaultTableModel();
+    
+    // Define date format
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    Date date = new Date();
     
     public ViewPrescription() {
         initComponents();
         
         // Set column names for table
         dtm.setColumnIdentifiers(new Object[] {"Drug name", "Dose", "Frequency", "Start date", "End date", "Status"});
-            jTable1.setModel(dtm);
+        jTable1.setModel(dtm);
     }
 
     /**
@@ -46,7 +48,6 @@ public class ViewPrescription extends javax.swing.JFrame {
         txtPatientType = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,13 +119,6 @@ public class ViewPrescription extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,8 +162,6 @@ public class ViewPrescription extends javax.swing.JFrame {
                                 .addComponent(lblDoctorId)
                                 .addGap(50, 50, 50)
                                 .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(178, 178, 178)
-                                .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblDoctorName)
                                 .addGap(18, 18, 18)
@@ -197,18 +189,15 @@ public class ViewPrescription extends javax.swing.JFrame {
                     .addComponent(txtPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPatientId))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDoctorName)
-                            .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDoctorId)
-                            .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonExit))
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDoctorName)
+                    .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDoctorId)
+                    .addComponent(txtDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonExit)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -233,8 +222,6 @@ public class ViewPrescription extends javax.swing.JFrame {
     private void btnCheckPrescriptionIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckPrescriptionIdActionPerformed
 
         int id = Integer.parseInt(txtPrescriptionId.getText());
-        txtPrescriptionId.setText("Searching...");
-//        System.out.println(id);
 
         try {
             
@@ -243,7 +230,7 @@ public class ViewPrescription extends javax.swing.JFrame {
             
             // Get values from DB and sets to the from
             txtPrescriptionId.setText(String.valueOf(p.getIdPrescription()));
-            txtDate.setText(String.valueOf(p.getDate()));
+            txtDate.setText(formatter.format(p.getDate()));
             txtDoctorName.setText(p.getNameDoctor());
             txtPatientName.setText(p.getNamePatient());
             txtPatientType.setText(String.valueOf(p.getTypePatient()));
@@ -254,8 +241,8 @@ public class ViewPrescription extends javax.swing.JFrame {
             String drugName = p.getNameDrug();
             String dose = p.getDose();
             String frequency = p.getFrequency();
-            String startDate = String.valueOf(p.getDateStart());
-            String endDate = String.valueOf(p.getDateEnd());
+            String startDate = formatter.format(p.getDateStart());
+            String endDate = formatter.format(p.getDateEnd());
             String active = String.valueOf(p.getActive());            
             
             //Add Row
@@ -267,20 +254,6 @@ public class ViewPrescription extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_btnCheckPrescriptionIdActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String drugName = "1";
-        String dose = "2";
-        String frequency = "3";
-        String startDate = "4";
-        String endDate = "5";
-        String isActive = "Active";
-        
-        dtm.addRow(new Object[] {
-                    drugName, dose, frequency, startDate, endDate, isActive});
-        
-        System.out.println(drugName);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,7 +292,6 @@ public class ViewPrescription extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCheckPrescriptionId;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

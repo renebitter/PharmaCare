@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pharmacarerene;
 
 import java.text.SimpleDateFormat;
@@ -10,16 +5,12 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author reneb
- */
 public class WritePrescription extends javax.swing.JFrame {
 
-    /**
-     * Creates new form WritePrescription
-     */
+    // Define table model
     DefaultTableModel dtm = new DefaultTableModel();
+    
+    // Define date format
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
     
@@ -29,7 +20,6 @@ public class WritePrescription extends javax.swing.JFrame {
         
             try {
             // Set date
-
             txtDate.setText(formatter.format(date));
             txtStartDate.setText(formatter.format(date));
             txtEndDate.setText(formatter.format(date));
@@ -510,7 +500,7 @@ public class WritePrescription extends javax.swing.JFrame {
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         
 //        String id =txtDoctorId.getText();
-        txtPrescriptionId.setText("123");
+        txtDate.setText("123");
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     private void btnCheckDoctorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckDoctorIdActionPerformed
