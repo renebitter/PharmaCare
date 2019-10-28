@@ -486,8 +486,23 @@ public class WritePrescription extends javax.swing.JFrame {
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         
-//        int idPatient = Integer.parseInt(txtPatientId.getText());
-//        System.out.println(idPatient);
+        //Set variables getText from form
+        int idPatient = Integer.parseInt(txtPatientId.getText());
+        int idDoctor = Integer.parseInt(txtDoctorId.getText());
+        String patientName = txtPatientName.getText();
+        String doctorName = txtDoctorName.getText();
+        
+        String patientTypeString = txtPatientType.getText();
+        int patientType = 0;       
+        
+//        if(patientTypeString == "Indoor") {
+//            patientType = 1;
+//        }else{
+//            patientType = 2;
+//        }
+        
+        
+        //Set variables getText from table
 
         try{            
             //Mysql insert statement
@@ -500,11 +515,11 @@ public class WritePrescription extends javax.swing.JFrame {
             // Create the mysql insert preparedstatement & return generated ID
             PreparedStatement ps = db.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
-            ps.setInt (1, 22);
-            ps.setInt (2, 23);
-            ps.setString (3, "Doctor Name");
-            ps.setString (4, "Patient Name");
-            ps.setInt (5, 1);
+            ps.setInt (1, idDoctor);
+            ps.setInt (2, idPatient);
+            ps.setString (3, doctorName);
+            ps.setString (4, patientName);
+            ps.setInt (5, patientType);
             ps.setString (6, "Drug Name");
             ps.setString (7, "Dose");
             ps.setString (8, "Frequency");
@@ -528,7 +543,7 @@ public class WritePrescription extends javax.swing.JFrame {
             
             //Set Prescription ID to text-field
             txtPrescriptionId.setText(String.valueOf(idPrescription));
-            System.out.println(idPrescription);
+            System.out.println(patientTypeString);
 
             ps.close();
              
