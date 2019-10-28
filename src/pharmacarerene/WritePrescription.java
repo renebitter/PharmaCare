@@ -3,6 +3,7 @@ package pharmacarerene;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -484,9 +485,86 @@ public class WritePrescription extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDoctorIdActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
-        //TODO: SET NEW PRESCRIPTION ID AVAILABLE ON THE DB
-//        String id =txtDoctorId.getText();
-        txtPrescriptionId.setText("123456");
+        
+//        int idPatient = Integer.parseInt(txtPatientId.getText());
+//        System.out.println(idPatient);
+
+        try{            
+            // the mysql insert statement
+            String sql = "INSERT INTO PRESCRIPTION (iddoctor, idpatient, doctor_name, patient_name, patient_type, drug_name, dose, frequency, start_date, end_date, active, date)" 
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql2 = "SELECT IDPRESCRIPTION FROM PRESCRIPTION";
+            Connection db = DButils.getConnection();
+            
+             
+             // create the mysql insert preparedstatement
+            PreparedStatement ps = db.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt (1, 22);
+            ps.setInt (2, 23);
+            ps.setString (3, "Doctor Name");
+            ps.setString (4, "Patient Name");
+            ps.setInt (5, 1);
+            ps.setString (6, "Drug Name");
+            ps.setString (7, "Dose");
+            ps.setString (8, "Frequency");
+            ps.setDate (9, null);
+            ps.setDate (10, null);
+            ps.setInt (11, 1);
+            ps.setDate (12, null);
+            
+//            ResultSet rs = ps.executeQuery();
+//            int idPrescription = rs.getInt("IDPRESCRIPTION");
+
+            
+             // execute the preparedstatement
+             ps.executeUpdate();
+             
+             //Get Prescription ID
+//             int idPrescription = ps.executeQuery( ps2.RETURN_GENERATED_KEYS);
+//             txtPrescriptionId.setText(String.valueOf(idPrescription));
+//            ResultSet generatedKeysResultSet = ps.getGeneratedKeys();
+//            generatedKeysResultSet.next();
+//            int idPrescription = ps.getGeneratedKeys();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            System.out.println(rs);
+
+
+             ps.close();
+             
+           }
+           catch (Exception e)
+           {
+             System.err.println("Got an exception!");
+             System.err.println(e.getMessage());
+           }
+        
+        
+//        try
+//        {
+//            
+//            String sql = "SELECT IDPRESCRIPTION FROM PRESCRIPTION";
+//            Connection db = DButils.getConnection();
+//            PreparedStatement ps = db.prepareStatement(sql);
+////            ps.setInt(1, prescriptionNo);
+//            ResultSet rs = ps.executeQuery();
+////            Prescription p = null;
+////            if (rs.next()) {      
+//
+//                int idPrescription = rs.getInt("IDPRESCRIPTION");
+//                txtPrescriptionId.setText(String.valueOf(idPrescription));
+////            }            
+//
+//            ps.close();
+//        } 
+//        catch (Exception e)
+//           {
+//             System.err.println("Got an exception!");
+//             System.err.println(e.getMessage());
+//           }
+         
+
+
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     private void btnCheckDoctorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckDoctorIdActionPerformed
