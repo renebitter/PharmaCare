@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -503,7 +507,25 @@ public class WritePrescription extends javax.swing.JFrame {
         
         
         //Set variables getText from table
+        //TODO: itarate/for loop through all row/column indexes / create array/object to store data
+        String drugName = (String) jTable.getModel().getValueAt(0, 0);
+        String dose = (String) jTable.getModel().getValueAt(0, 1);
+        String frequency = (String) jTable.getModel().getValueAt(0, 2);
+        String dateStart =  (String) jTable.getModel().getValueAt(0, 3);
+//        Date dateEnd = (Date) jTable.getModel().getValueAt(0, 4);
+//        Date dateStartFormatted = formatter.format(dateStart);
+//        dateStart(formatter.format(date));
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        Date dateStartFormatted = null;
+//        try {
+//            dateStartFormatted = format.parse(dateStart);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(WritePrescription.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        System.out.println(dateStartFormatted);
 
+        System.out.println(dateStart);
+        
         try{            
             //Mysql insert statement
             String sql = "INSERT INTO PRESCRIPTION (iddoctor, idpatient, doctor_name, patient_name, patient_type, drug_name, dose, frequency, start_date, end_date, active, date)" 
@@ -520,9 +542,9 @@ public class WritePrescription extends javax.swing.JFrame {
             ps.setString (3, doctorName);
             ps.setString (4, patientName);
             ps.setInt (5, patientType);
-            ps.setString (6, "Drug Name");
-            ps.setString (7, "Dose");
-            ps.setString (8, "Frequency");
+            ps.setString (6, drugName);
+            ps.setString (7, dose);
+            ps.setString (8, frequency);
             ps.setDate (9, null);
             ps.setDate (10, null);
             ps.setInt (11, 1);
